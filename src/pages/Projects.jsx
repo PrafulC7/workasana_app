@@ -9,8 +9,9 @@ const Projects = () => {
    useEffect(() => {
   const fetchTasks = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/tasks");
+      const response = await axios.get("https://workasana-backend-kohl.vercel.app/tasks");
       setTasksData(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.error("Error fetching leads:", error);
     }
