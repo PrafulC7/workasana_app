@@ -36,9 +36,7 @@ if (loading) return <h3>Loading...</h3>;
         </span>
 
         <span className="viewLeads-item gap">
-          {task.owners.map((own) => (
-            <div key={own._id}>{own.name}</div>
-          ))}
+          {task.owners.map((own) => own.name).join(", ")}
         </span>
       </Link>
     ))}
