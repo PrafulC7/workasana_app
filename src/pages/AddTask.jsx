@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const AddTask = () => {
-
+const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [users, setUsers] = useState([]);
   const [teams, setTeams] = useState([]);
@@ -101,7 +102,8 @@ if (taskData.owners.length === 0) {
     await axios.post("https://workasana-backend-kohl.vercel.app/tasks", payload);
 
     // ✅ success feedback
-    toast.success(`Task created successfully!`);
+     navigate("/dashboard");
+    // toast.success(`Task created successfully!`);
     // alert("Task created successfully!");
 
     // ✅ optional: reset form

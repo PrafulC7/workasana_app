@@ -1,7 +1,9 @@
 import {useState} from 'react';
 import axios from "axios";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 const AddTeam = () => {
+  const navigate = useNavigate();
       const [name, setName] = useState("");
       const [description, setDescription] = useState("");
 
@@ -16,7 +18,8 @@ const AddTeam = () => {
         name,
         description,
       });
- toast.success(`Team created successfully!`);
+        navigate("/dashboard");
+//  toast.success(`Team created successfully!`);
       setName("");
       setDescription("");
     //   fetchTeams(); // refresh list

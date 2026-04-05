@@ -12,7 +12,7 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink to="/projects" className="link">
-          Projects
+         Tasks
         </NavLink>
 
         <NavLink to="/teams" className="link">
