@@ -98,7 +98,12 @@ const Projects = () => {
 
       {/* 📋 Task List */}
       <div className="list">
-        {filteredTasks.map((task) => (
+        {filteredTasks.length===0?(
+          <>
+        <p className="no-data">
+    No Task found for the selected status/tag
+  </p>
+        </>):(filteredTasks.map((task) => (
           <Link
   to={`/tasks/${task._id}`}
   key={task._id}
@@ -137,7 +142,7 @@ const Projects = () => {
     <span className="status">{task.status}</span>
   </div>
 </Link>
-        ))}
+        )))}
       </div>
     </div>
   );

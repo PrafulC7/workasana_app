@@ -675,3 +675,9 @@ width: 32%;
 .status {
   font-weight: bold;
 }
+.no-data {
+  text-align: center;
+  margin-top: 20px;
+  color: #6b7280;
+  font-weight: 500;
+}

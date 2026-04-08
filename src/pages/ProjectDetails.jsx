@@ -23,7 +23,6 @@ const [sortType, setSortType] = useState("");
     try {
       const response = await axios.get(`https://workasana-backend-kohl.vercel.app/projects/${id}`);
       setProjectsData(response.data);
-      console.log(response.data)
     } catch (error) {
       console.error("Error fetching leads:", error);
     } finally {
@@ -63,7 +62,12 @@ if (loading) return <h3>Loading...</h3>;
     <>
     <h4><strong>Project: </strong>{projectsData.name}</h4>
 
-{filteredTasks.map((task) => (
+{filteredTasks.length===0?(
+          <>
+        <p className="no-data">
+    No Task found for the selected status
+  </p>
+        </>):(filteredTasks.map((task) => (
   <div key={task._id} className="card p-2 mb-2">
     <h5><strong>Task: </strong>{task.name}</h5>
     <p>Status: {task.status}</p>
@@ -73,7 +77,7 @@ if (loading) return <h3>Loading...</h3>;
       {task.owners.map((o) => o.name).join(", ")}
     </p>
   </div>
-))}
+)))}
 
 <div className="d-flex gap-3 mb-3">
 

@@ -36,6 +36,9 @@ const Dashboard = () => {
   fetchData();
 }, []);
     
+const filteredTasks = tasksData.filter(
+  (task) => !statusFilter || task.status === statusFilter
+);
 if (loading) return <h3>Loading...</h3>;
   return (
      <div className="dashboard">
@@ -68,50 +71,32 @@ if (loading) return <h3>Loading...</h3>;
       </div>
         {/* <h1>My Tasks</h1> */}
 <div className="card-grid">
-  {tasksData
-    .filter((task) => !statusFilter || task.status === statusFilter)
-    .map((task) => (
-        <Link to={`/tasks/${task._id}`} key={task._id} className="project-card">
-        <strong>{task.name}</strong><br/>
-        <span>
-          Due on: {new Date(task.dueDate).toLocaleDateString("en-GB", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-})}
-        </span>
+{filteredTasks.length === 0 ? (
+  <p className="no-data">
+    No Task found for the selected status
+  </p>
+) : (
+  filteredTasks.map((task) => (
+    <Link
+      to={`/tasks/${task._id}`}
+      key={task._id}
+      className="project-card"
+    >
+      <strong>{task.name}</strong><br />
 
-        <span>
-          {task.owners.map((own) => (
-            <div key={own._id}>{own.name}</div>
-          ))}
-        </span>
-      </Link>
-    ))}
+      <span>
+        Due on:{" "}
+        {new Date(task.dueDate).toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        })}
+      </span>
+    </Link>
+  ))
+)}
 </div>
-     {/* <div className="list">
-  {tasksData
-    .filter((task) => !statusFilter || task.status === statusFilter)
-    .map((task) => (
-        <Link to={`/tasks/${task._id}`} key={task._id} className="agent-list-item">
-        <strong className="viewLeads-item">{task.name}</strong>
-        <span className="viewLeads-item">
-          {task.timeToComplete} days to complete
-        </span>
-
-        <span className="viewLeads-item gap">
-          {task.owners.map((own) => (
-            <div key={own._id}>{own.name}</div>
-          ))}
-        </span>
-      </Link>
-    ))}
-</div> */}
-      {/* <div>
-              <Link to="/tasks/new" className="add-btn">
-  + Add New Task
-</Link>
-</div> */}
+     
 <div className="controls">
 <select onChange={(e) => setStatusFilter(e.target.value)} className="form-select w-25">
   <option value="">All Tasks</option>
